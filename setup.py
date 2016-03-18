@@ -37,7 +37,6 @@ setup(
 	# classifiers=[],
 	# platforms=[],
 	license="MIT",
-	zip_safe=False,
 	packages=[
 		"geotagx",
 		# "geotagx.build",
