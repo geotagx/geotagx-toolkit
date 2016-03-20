@@ -3,7 +3,7 @@
 # This setup script is inspired by code from the Pip setup.py found
 # here: https://github.com/pypa/pip/blob/develop/setup.py
 import os, re, codecs
-from setuptools import setup
+from setuptools import setup, find_packages
 
 cwd = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,6 +27,14 @@ setup(
 	version=find_version("geotagx", "__init__.py"),
 	description="The GeoTag-X command line toolkit.",
 	long_description=read("README.md"),
+	zip_safe=True,
+	install_requires=[
+		"geotagx_builder",
+		"geotagx_sanitizer>=0.0.3",
+	],
+	dependency_links=[
+		"https://github.com/othieno/geotagx-tool-sanitizer/archive/v0.0.3.tar.gz#egg=geotagx_sanitizer-0.0.3",
+	],
 	# keywords="",
 	# author="",
 	# author_email="",
@@ -37,20 +45,10 @@ setup(
 	# classifiers=[],
 	# platforms=[],
 	license="MIT",
-	packages=[
-		"geotagx",
-		# "geotagx.build",
-		"geotagx.sanitize",
-	],
-	package_dir={
-		# "geotagx.build":"geotagx/geotagx-build/builder",
-		"geotagx.sanitize":"geotagx/geotagx-sanitize/sanitizer",
-	},
+	packages=find_packages(),
 	entry_points={
-			"console_scripts":[
-				"geotagx=geotagx.core:main",
-				# "geotagx-build=geotagx.build.core:main",
-				"geotagx-sanitize=geotagx.sanitize.core:main",
+		"console_scripts":[
+			"geotagx=geotagx.core:main",
 		],
 	}
 )

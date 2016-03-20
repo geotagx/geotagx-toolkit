@@ -21,43 +21,47 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
-def init_argument_parser():
+def _init_argparser():
 	"""Initializes the toolkit's command line argument parser."""
 	from __init__ import __version__
 	import argparse
+
 	parser = argparse.ArgumentParser(
 		prog="geotagx",
 		description="A set of tools that help manage a GeoTag-X server.",
 		add_help=False
 	)
-	parser.set_defaults(handler=None)
 	options = parser.add_argument_group("OPTIONS")
 	options.add_argument("-h", "--help", action="help", help="Display this help and exit.")
-	options.add_argument("--version", action="version", help="Display version information and exit.", version="""
-		GeoTag-X Command Line Toolkit v%s, Copyright (C) UNITAR/UNOSAT.
-	""" % __version__)
+	options.add_argument("-v", "--version", action="version", help="Display version information and exit.", version=_version())
 
 	return parser
 
 
+def _version():
+	"""Returns the project's version string."""
+	from geotagx import __version__
+	return "GeoTag-X Command Line Toolkit v%s, Copyright (C) 2016 UNITAR/UNOSAT." % __version__
+
+
 def main(argv=None):
 	import sys
-	# import geotagx.build.core
-	import geotagx.sanitize.core
+	import geotagx_builder.core as builder
+	import geotagx_sanitizer.core as sanitizer
 
-	parser = init_argument_parser()
+	parser = _init_argparser()
 
 	# Initialize each tool's argument parser.
 	subparsers = parser.add_subparsers(
 		title="COMMANDS",
-		metavar="",
+		metavar="", # Remove the default metavar by setting it to an empty string. Setting it to 'None' uses a default value.
 		description="The following is a set of commands you can use to select a specific tool.",
 		prog="geotagx"
 	)
 	parents = [parser]
 	initializers = [
-		# geotagx.build.core.init_argument_parser,
-		geotagx.sanitize.core.init_argument_parser
+		builder._init_argparser,
+		sanitizer._init_argparser,
 	]
 	for initializer in initializers:
 		initializer(subparsers, parents)
@@ -65,6 +69,8 @@ def main(argv=None):
 	arguments = parser.parse_args(sys.argv[1:] if argv is None else argv)
 
 	# Make sure the 'handler' argument is callable (a function or method).
+	# Note: the handler is a reference set to a callable object by the tool during
+	# the _init_argparser call.
 	run = arguments.handler
 	if not hasattr(run, "__call__"):
 		parser.error("The 'handler' argument is not callable.")
