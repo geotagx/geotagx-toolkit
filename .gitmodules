@@ -1,3 +1,0 @@
-[submodule "geotagx/geotagx-sanitize"]
-	path = geotagx/geotagx-sanitize
-	url = https://github.com/othieno/geotagx-sanitize.git
