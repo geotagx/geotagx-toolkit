@@ -24,7 +24,7 @@ def find_version(*file_paths):
 
 setup(
 	name="geotagx-toolkit",
-	version=find_version("geotagx", "__init__.py"),
+	version=find_version("src", "__init__.py"),
 	description="The GeoTag-X command line toolkit.",
 	long_description=read("README.md"),
 	zip_safe=True,
@@ -45,10 +45,11 @@ setup(
 	# classifiers=[],
 	# platforms=[],
 	license="MIT",
-	packages=find_packages(),
+    packages=["geotagx_toolkit"],
+    package_dir={"geotagx_toolkit":"src"},
 	entry_points={
 		"console_scripts":[
-			"geotagx=geotagx.core:main",
+			"geotagx=geotagx_toolkit.toolkit:main"
 		],
 	}
 )
