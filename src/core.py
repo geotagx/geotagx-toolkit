@@ -40,7 +40,7 @@ def _init_argparser():
 
 def _version():
 	"""Returns the project's version string."""
-	from geotagx import __version__
+	from __init__ import __version__
 	return "GeoTag-X Command Line Toolkit v%s, Copyright (C) 2016 UNITAR/UNOSAT." % __version__
 
 
