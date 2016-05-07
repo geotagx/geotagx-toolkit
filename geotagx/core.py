@@ -47,7 +47,7 @@ def _version():
 def main(argv=None):
 	import sys
 	import geotagx_builder.core as builder
-	import geotagx_sanitizer.core as sanitizer
+	import geotagx_sanitizer.sanitizer as sanitizer
 
 	parser = _init_argparser()
 
