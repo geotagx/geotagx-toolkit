@@ -30,10 +30,10 @@ setup(
 	zip_safe=True,
 	install_requires=[
 		"geotagx_builder",
-		"geotagx_sanitizer>=0.0.5",
+		"geotagx_sanitizer>=0.0.6",
 	],
 	dependency_links=[
-		"https://github.com/othieno/geotagx-tool-sanitizer/archive/v0.0.5.tar.gz#egg=geotagx_sanitizer-0.0.5",
+		"https://github.com/othieno/geotagx-tool-sanitizer/archive/v0.0.6.tar.gz#egg=geotagx_sanitizer-0.0.6",
 	],
 	# keywords="",
 	# author="",
