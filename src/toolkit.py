@@ -23,7 +23,6 @@
 # OR OTHER DEALINGS IN THE SOFTWARE.
 def _init_argparser():
     """Initializes the toolkit's command line argument parser."""
-    from __init__ import __version__
     import argparse
 
     parser = argparse.ArgumentParser(
