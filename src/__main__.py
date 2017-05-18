@@ -62,10 +62,12 @@ def get_argparser():
         prog="geotagx"
     )
 
+    import geotagx_builder.__main__ as builder
     import geotagx_validator.__main__ as validator
     import geotagx_formatter.__main__ as formatter
 
     for get_argparser in [
+        builder.get_argparser,
         validator.get_argparser,
         formatter.get_argparser,
     ]: get_argparser(subparsers)
